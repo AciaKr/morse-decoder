@@ -57,7 +57,7 @@ let decode = (message) => {
         });
         messageConverted.push(' ');
     })
-    return messageConverted.join('');
+    return messageConverted.join('').trim();
 }
 
 module.exports = {
