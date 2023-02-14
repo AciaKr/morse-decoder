@@ -37,8 +37,27 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
-function decode(expr) {
-    // write your solution here
+let decode = (message) => {
+    let messageConverted = [];
+    message.split('**********').map( word => {
+        let decodedWord = [];
+        let codeMorse = '';
+        for(i = 0; i < word.length; i += 10) {
+            decodedWord.push(+word.slice(i, i+10).toString());
+        }
+        decodedWord.map( letter => {
+            let decodedLetter = [];
+            letter = letter.toString();
+            for(j = 0; j < letter.length; j += 2 ) {
+                if (letter.slice(j, j+2) == 10) {decodedLetter.push('.')}
+                if (letter.slice(j, j+2) == 11) {decodedLetter.push('-')}
+            }
+            codeMorse = decodedLetter.join('');
+            messageConverted.push(MORSE_TABLE[codeMorse]);
+        });
+        messageConverted.push(' ');
+    })
+    return messageConverted.join('');
 }
 
 module.exports = {
